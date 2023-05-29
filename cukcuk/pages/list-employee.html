@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/pages/list-employee.css">
+    <title>List-Employee</title>
+</head>
+<body>
+    <div class="main">
+
+        <!-- header -->
+
+        <div class="header">
+          <p>Danh sách nhân viên</p>
+          <button id="btnAdd" class="m-button m-button-icon">Thêm nhân viên</button>
+        </div>
+
+        <!-- fitter -->
+
+        <div class="search">
+           <div class="search-and-fitter">
+             <div class="search-employee">
+                <img src="../assets/icon/search.png" alt="search">
+                <input id="searchEmployee" type="text" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"/>
+             </div>
+             <div class="select-department">
+                <select id="select-department" class="custom-select-department select-fitter">
+                  <!-- <option value="">Tất cả phòng ban</option>
+                  <option value="469b3ece-744a-45d5-957d-e8c757976496">Phòng bảo vệ</option>
+                  <option value="2">Phòng ban 2</option> -->
+                </select>
+              </div>
+              <div class="select-location" >
+                <select id="select-position" class="custom-select-location select-fitter">
+                  <!-- <option value="">Tất cả vị trí</option>
+                  <option value="25c6c36e-1668-7d10-6e09-bf1378b8dc91">Trưởng dự án</option>
+                  <option value="2">Vị trí 2</option> -->
+                </select>
+              </div>
+           </div>
+           <div class="reload">
+               <button id="btnDelete"></button>
+               <button id="btnReplication"></button>
+               <button class="button-reload"></button>
+           </div>
+        </div>
+
+        <!-- table container -->
+
+        <div class="container">
+            <table id="tbEmployeeList" class="customers-table">
+             <thead>
+                <tr>
+                    <th propValue="Sort" class="text-align--left" title="Số thứ tự">STT</th>
+                    <th propValue="employeeCode" class="text-align--left" style="width:100px">Mã nhân viên</th>
+                    <th propValue="employeeName" class="text-align--left">Họ và tên</th>
+                    <th propValue="dateOfBirth" format="date" class="text-align--center">Ngày sinh</th>
+                    <th propValue="gender" format="gender" class="text-align--left" style="width:50px">Giới tính</th>
+                    <th propValue="phoneNumber" class="text-align--left" >Điện thoại</th>
+                    <th propValue="email" class="text-align--left" >Email</th>
+                    <th propValue="indentityNumber" class="text-align--left" >Số chứng minh thư</th>
+                    <th propValue="indentityIssuedDate" format="date" class="text-align--left" >Ngày cấp</th>
+                    <th propValue="indentityIssuedPlace" class="text-align--left" >Nơi cấp</th>
+                    <th propValue="departmentID" format="departmentid" class="text-align--left">Tên phòng ban</th>
+                    <th propValue="positionID" format="positionid" class="text-align--left" >Tên vị trí</th>
+                    <th propValue="salary" format="money" class="text-align--right" >Mức lương cơ bản</th>
+                    <th propValue="workStatus" format="workstatus" class="text-align--left" >Tình trạng công việc</th>
+                </tr>
+             </thead>
+             <tbody>
+
+             </tbody>
+            </table>
+            <div class="pagination-nocaption">
+                <div id="showallemployee" class="pagination-nocaption-left">
+                   <!-- Hiển thị 1-10/1000 nhân viên -->
+                </div>
+                <div id="paging" class="pagination">
+                    <!-- <a id="" class="active" href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a> -->
+                  </div>
+                  <div class="pagination-nocaption-right">
+                      <select id="pagesize">
+                        <option value="9">9 nhân viên/trang</option>
+                        <option value="10">10 nhân viên/trang</option>
+                        <option value="15">15 nhân viên/trang</option>
+                        <option value="20">20 nhân viên/trang</option>
+                        <option value="30">30 nhân viên/trang</option>
+                      </select>
+                  </div>
+            </div>
+            <div id="employeedata"></div>
+        </div>
+
+        <!-- form add employee -->
+
+        <form class="container-add-employee" method="post" id="form-1">
+            <div class="container-frames-add-employee">
+            <div class="add-employee-header">
+                <h3>THÔNG TIN NHÂN VIÊN</h3>
+                <img id="btnClose" src="../assets/icon/x.svg" alt="X">
+            </div>
+            <div class="add-employee-form">
+                 <div class="employee-form-left">
+                   <img src="../assets/img/default-avatar.jpg" alt="">
+                   <p>(Vui lòng chọn ảnh có định dạng.jpg, .jpeg, .png, .gif, )</p>
+                 </div>
+                 <div class="employee-form-right">
+                    <div class="form-right-information">
+                        <h4>A. THÔNG TIN CHUNG:</h4>
+                    </div>
+                    <div class="form-right-information-container">
+                        <div class="information-container-item">
+                            <div class="container-item-one form-group">
+                                 <h5>Mã nhân viên(<span class="input--required">*</span>)</h5>
+                                 <input id="employeeCode" name="employeeCode" propValue="employeeCode" type="text" class="input-text" placeholder="Nhập mã nhân viên">
+                                 <p class="form-message"></p>
+                            </div>
+                            <div class="container-item-two form-group">
+                                <h5>Họ và tên</h5>
+                                <input id="employeeName" name="employeeName" propValue="employeeName" type="text" class="input-text" placeholder="Nhập họ và tên">
+                                <p class="form-message"></p>
+                           </div>
+                        </div>
+                        <div class="information-container-item">
+                            <div class="container-item-one form-group">
+                                 <h5>Ngày sinh</h5>
+                                 <input id="dateOfBirth" name="dateOfBirth" propValue="dateOfBirth" type="date" class="input-text" >
+                                 <p class="form-message"></p>
+                            </div>
+                            <div class="container-item-two form-group">
+                                <h5>Giới tính</h5>
+                                <select id="gender" name="gender" propValue="gender" class="input-text">
+                                    <option value="">-- Chọn giới tính --</option>
+                                    <option value="0">Nữ</option>
+                                    <option value="1">Nam</option>
+                                    <option value="2">Khác</option>
+                                </select>
+                                <p class="form-message"></p>
+                           </div>
+                        </div>
+                        <div class="information-container-item">
+                            <div class="container-item-one form-group">
+                                 <h5>Số CMTND/Căn cước(<span class="input--required">*</span>)</h5>
+                                 <input id="indentityNumber" name="indentityNumber" propValue="indentityNumber" type="text" class="input-text" placeholder="Nhập số CMTD/ Căn cước">
+                                 <p class="form-message"></p>
+                                </div>
+                            <div class="container-item-two form-group">
+                                <h5>Nơi cấp</h5>
+                                <input id="indentityIssuedPlace" name="indentityIssuedPlace" propValue="indentityIssuedPlace" type="text" class="input-text" placeholder="Nhập nới cấp">
+                                <p class="form-message"></p>
+                           </div>
+                        </div>
+                        <div class="information-container-item">
+                            <div class="container-item-one form-group">
+                                <h5>Ngày cấp</h5>
+                                <input id="indentityIssuedDate" name="indentityIssuedDate" propValue="indentityIssuedDate" type="date" class="input-text">
+                                <p class="form-message"></p>
+                            </div>
+                        </div>
+                        <div class="information-container-item">
+                            <div class="container-item-one form-group">
+                                 <h5>Email(<span class="input--required">*</span>)</h5>
+                                 <input id="email" name="email" type="text" propValue="email" class="input-text" placeholder="Nhập email">
+                                 <p class="form-message"></p>
+                            </div>
+                            <div class="container-item-two form-group">
+                                <h5>Số điện thoại(<span class="input--required">*</span>)</h5>
+                                <input id="phoneNumber" name="phoneNumber" propValue="phoneNumber" type="text" class="input-text" placeholder="Nhập số điện thoại">
+                                <p class="form-message"></p>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="form-right-information">
+                        <h4>B. THÔNG TIN CÔNG VIỆC:</h4>
+                    </div>
+                    <div class="form-right-information-container">
+                        <div class="information-container-item">
+                            <div class="container-item-one form-group">
+                                 <h5>Vị trí</h5>
+                                 <select id="positionID" name="positionID" propValue="positionID" class="input-text">
+                                    <option value="">-- Chọn vị trí --</option>
+                                    <option value="25c6c36e-1668-7d10-6e09-bf1378b8dc91">Trưởng dự án</option>
+                                    <option value="30d41e52-5e66-72bc-6c1c-b47866e0b131">Trưởng phòng</option>
+                                    <option value="548dce5f-5f29-4617-725d-e2ec561b0f41">Quản trị hệ thống</option>
+                                </select>
+                                <p class="form-message"></p>
+                            </div>
+                            <div class="container-item-two form-group">
+                                <h5>Phòng ban</h5>
+                                <select id="departmentID" name="departmentID" propValue="departmentID" class="input-text">
+                                    <option value="">-- Chọn phòng ban --</option>
+                                    <option value="4e272fc4-7875-78d6-7d32-6a1673ffca7c">Phòng hỗ trợ khách hàng</option>
+                                    <option value="7c4f14d8-66fb-14ae-198f-6354f958f4c0">Phòng Kế Toán</option>
+                                    <option value="78aafe4a-67a7-2076-3bf3-eb0223d0a4f7">Phòng Nhân Sự</option>
+                                </select>
+                                <p class="form-message"></p>
+                           </div>
+                        </div>
+                        <div class="information-container-item">
+                            <div class="container-item-one form-group" >
+                                 <h5>Mã số thuế cá nhân</h5>
+                                 <input id="taxCode" name="taxCode" propValue="taxCode" type="text" class="input-text" placeholder="Nhập mã số thuế cá nhân">
+                                 <p class="form-message"></p>
+                            </div>
+                            <div class="container-item-two form-group">
+                                <h5>Mức lương cơ bản</h5>
+                                <input id="salary" name="salary" propValue="salary" type="text" class="input-text" placeholder="Nhập mức lương cơ bản">
+                                <p class="form-message"></p>
+                           </div>
+                        </div>
+                        <div class="information-container-item">
+                            <div class="container-item-one form-group">
+                                 <h5>Ngày gia nhập công ty</h5>
+                                 <input id="joiningDate" name="joiningDate" propValue="joiningDate" type="date" class="input-text">
+                                 <p class="form-message"></p>
+                            </div>
+                            <div class="container-item-two form-group">
+                                <h5>Tình trạng công việc</h5>
+                                <select id="workStatus" name="workStatus" propValue="workStatus" class="input-text" >
+                                    <option value="">-- Chọn tình trạng công việc --</option>
+                                    <option value="0">Đang làm </option>
+                                    <option value="1">Nghỉ phép</option>
+                                    <option value="2">Đã nghỉ</option>
+                                </select>
+                                <p class="form-message"></p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="add-employee-footer">
+                <div class="container-footer">
+                    <a href="#">Hủy</a>
+                    <button type="submit" id="btnSave" class="m-button m-button-icon">Lưu</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+     <!-- Nhúng các thư viện -->
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/moment.js"></script>
+
+    <!-- Nhúng các js dùng chung -->
+    
+    <!-- Nhúng các js sử dụng riêng -->
+    <script src="../js/pages/list-employee.js"></script>
+    <script src="../js/base/validator.js"></script>
+    <script>
+        // Mong muốn của chúng ta
+        Validator({
+            form:'#form-1',
+            formGroupSelector: '.form-group',
+            errorSelector:'.form-message',
+            rules:[
+                
+                // Đầu tiền kểm tra có rỗng hay không nếu rỗng thì thông báo người dùng nhập
+                // Khi người dùng đã nhập thì tiến hành kiểm tra iput đầu vào có hợp lệ hay không nếu không hợp lệ thì thông báo 
+                // Khi người dùng nhấn Lưu các trường cũng sẽ thông báo yêu cầu nhập
+
+                // Tham số thứ 2 truyền vào thì in ra thông báo
+                // Còn nếu không truyền tham số thứ 2 thì mặc định nó sẽ lấy thông báo bên kia để thông báo
+                
+                // Mã nhân viên 
+                //Validator.isRequired('#employeeCode','Vui lòng nhập mã nhân viên'),
+
+                // Họ tên
+               // Validator.isRequired('#employeeName','Vui lòng nhập họ tên'),
+
+                // Ngày sinh
+                Validator.isRequired('#dateOfBirth'),
+                Validator.isDatevalid('#dateOfBirth'),
+
+                // Giới tính
+                Validator.isRequired('#genderName'),
+
+                // // CMND or CCCD
+                // Validator.isRequired('#IdentityNumber'),
+                // Validator.isCmndMinLength('#IdentityNumber',9,12),
+
+                // // Ngày cấp
+                Validator.isRequired('#indentityIssuedDate'),
+                Validator.isDatevalid('#indentityIssuedDate'),
+
+                // // Nơi cấp
+                // Validator.isRequired('#IdentityPlace'),
+
+                // // Email
+                 Validator.isRequired('#email'),
+                 Validator.isEmail('#email'),
+
+                // // Số điện thoại
+                Validator.isRequired('#phoneNumber'),
+
+                // // Vị trí
+                // Validator.isRequired('#PositionName'),
+
+                // // Phòng ban
+                // Validator.isRequired('#DepartmentName'),
+
+                // // Mã số thuế cá nhân
+                // Validator.isRequired('#PersonalCode'),
+
+                // // Mức lương cơ bản
+                // Validator.isRequired('#BasicSalary'),
+                
+                // // Ngày gia nhập công ty
+                 Validator.isRequired('#joiningDate'),
+                 Validator.isDatevalid('#joiningDate'),
+
+                // // Tình trạng công việc
+                // Validator.isRequired('#WorkStatus'),
+            ],
+            onSubmit: function(data){
+                
+            }
+        });
+    </script>
+</body>
+</html>
